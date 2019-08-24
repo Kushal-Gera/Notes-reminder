@@ -3,4 +3,5 @@
     <string name="description">description</string>
     <string name="add">Add Here</string>
     <string name="take_notes">Take Notes</string>
+    <string name="saved_notes">Saved Notes</string>
 </resources>
