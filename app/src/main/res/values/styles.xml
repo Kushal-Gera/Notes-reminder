@@ -5,7 +5,7 @@
 
         <item name="backgroundColor">#FAFAFA</item>
         <item name="cardBackgroundColor">#FFFFFF</item>
-        <item name="tabSelectedColor">#2d2d2d</item>
+        <item name="tabSelectedColor">@color/colorGray</item>
         <item name="accentColor">@color/colorAccent</item>
 
         <item name="primaryColor">#29B6F6</item>
@@ -19,10 +19,10 @@
     <!-- DarkTheme theme. -->
     <style name="DarkTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
-        <item name="backgroundColor">#2B2B2B</item>
+        <item name="backgroundColor">@color/colorGray</item>
         <item name="cardBackgroundColor">#3C3F41</item>
         <item name="tabSelectedColor">#29B6F6</item>
-        <item name="accentColor">#3C3F41</item>
+        <item name="accentColor">@color/colorSecText</item>
 
         <item name="primaryColor">#3C3F41</item>
         <item name="primaryDarkColor">@color/colorBlack</item>

@@ -18,6 +18,8 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
+    public static final String FLAG = "flag";
 
     TabLayout tabs;
     ViewPager viewPager;
@@ -26,7 +28,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.DarkTheme);
+        if (getIntent().hasExtra(FLAG)){
+
+            if (getIntent().getBooleanExtra(FLAG, false))
+                setTheme(R.style.DarkTheme);
+            else
+                setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_main);
 
         tabs = findViewById(R.id.tabs);
@@ -46,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.addFrag(new TakeNotes(), "Take Notes");
         adapter.addFrag(new SavedNotes(), "Saved Notes");
-        adapter.addFrag(new AddReminder(), "Add Reminder");
+        adapter.addFrag(new AddReminder(), "Reminder");
         viewPager.setAdapter(adapter);
     }
 

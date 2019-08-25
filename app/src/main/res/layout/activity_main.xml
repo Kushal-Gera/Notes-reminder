@@ -29,11 +29,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/primaryColor"
-        app:tabGravity="fill"
+        app:tabGravity="center"
         app:tabIndicatorColor="?attr/tabSelectedColor"
         app:tabIndicatorFullWidth="false"
-        app:tabIndicatorHeight="2dp"
-        app:tabMode="fixed"
+        app:tabIndicatorHeight="3dp"
         app:tabSelectedTextColor="?attr/tabSelectedColor"
         app:tabTextColor="@color/colorWhite" />
 
