@@ -8,6 +8,7 @@
     android:layout_marginTop="8dp"
     android:layout_marginEnd="4dp"
     android:layout_marginBottom="4dp"
+    android:background="?attr/backgroundColor"
     android:orientation="vertical"
     app:cardCornerRadius="25dp">
 
@@ -23,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:textColor="@color/colorPrimText"
+            android:textColor="?attr/primaryTextColor"
             android:textSize="20sp"
             android:textStyle="bold"
             tools:text="Title is here and to.." />
@@ -36,7 +37,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
-            android:textColor="@color/colorSecText"
+            android:textColor="?attr/secTextColor"
             android:textSize="18sp"
             tools:text="Title is here and to.. Title is her  e and to.. Title is here and to.. Title is here and to.." />
 

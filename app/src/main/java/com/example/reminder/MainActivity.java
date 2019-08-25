@@ -1,10 +1,15 @@
 package com.example.reminder;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.reminder.TabFragments.AddReminder;
 import com.example.reminder.TabFragments.SavedNotes;
@@ -17,9 +22,11 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabs;
     ViewPager viewPager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.DarkTheme);
         setContentView(R.layout.activity_main);
 
         tabs = findViewById(R.id.tabs);
@@ -27,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
 
         addtabs();
         tabs.setupWithViewPager(viewPager);
+
+
+
+
 
     }
 

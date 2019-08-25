@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CustomDark" >
+
+        <attr name="backgroundColor" format="color"/>
+        <attr name="cardBackgroundColor" format="color"/>
+        <attr name="tabSelectedColor" format="color"/>
+        <attr name="accentColor" format="color"/>
+
+        <attr name="primaryColor" format="color"/>
+        <attr name="primaryDarkColor" format="color"/>
+
+        <attr name="primaryTextColor" format="color"/>
+        <attr name="secTextColor" format="color"/>
+
+    </declare-styleable>
+</resources>

@@ -1,5 +1,6 @@
 package com.example.reminder.TabFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.reminder.MainActivity;
 import com.example.reminder.R;
 
 public class TakeNotes extends Fragment {

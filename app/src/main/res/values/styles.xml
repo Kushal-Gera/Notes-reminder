@@ -1,12 +1,37 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Light Theme theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
 
+        <item name="backgroundColor">#FAFAFA</item>
+        <item name="cardBackgroundColor">#FFFFFF</item>
+        <item name="tabSelectedColor">#2d2d2d</item>
+        <item name="accentColor">@color/colorAccent</item>
+
+        <item name="primaryColor">#29B6F6</item>
+        <item name="primaryDarkColor">#1976D2</item>
+
+        <item name="primaryTextColor">@color/colorPrimText</item>
+        <item name="secTextColor">@color/colorSecText</item>
     </style>
+
+
+    <!-- DarkTheme theme. -->
+    <style name="DarkTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="backgroundColor">#2B2B2B</item>
+        <item name="cardBackgroundColor">#3C3F41</item>
+        <item name="tabSelectedColor">#29B6F6</item>
+        <item name="accentColor">#3C3F41</item>
+
+        <item name="primaryColor">#3C3F41</item>
+        <item name="primaryDarkColor">@color/colorBlack</item>
+
+        <item name="primaryTextColor">@color/colorWhite</item>
+        <item name="secTextColor">#CBCBCB</item>
+    </style>
+
+
+
 
 </resources>
