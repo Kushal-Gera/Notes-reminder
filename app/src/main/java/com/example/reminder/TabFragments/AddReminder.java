@@ -14,10 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.reminder.App;
 import com.example.reminder.MainActivity;
 import com.example.reminder.R;
 
-public class AddReminder  extends Fragment{
+public class AddReminder extends Fragment {
     public static final String FLAG = "flag";
 
 
@@ -32,13 +33,17 @@ public class AddReminder  extends Fragment{
         changer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 intent.putExtra(FLAG, true);
                 startActivity(intent);
 
+                App app = new App();
+                app.finish(AddReminder.this);
             }
         });
         return view;
     }
+
+
+
 }

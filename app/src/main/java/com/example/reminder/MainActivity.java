@@ -23,17 +23,18 @@ public class MainActivity extends AppCompatActivity {
 
     TabLayout tabs;
     ViewPager viewPager;
+    TextView changer;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getIntent().hasExtra(FLAG)){
-
             if (getIntent().getBooleanExtra(FLAG, false))
                 setTheme(R.style.DarkTheme);
             else
                 setTheme(R.style.AppTheme);
+
         }
         setContentView(R.layout.activity_main);
 
@@ -42,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
         addtabs();
         tabs.setupWithViewPager(viewPager);
-
 
 
 
