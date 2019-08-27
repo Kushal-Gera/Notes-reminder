@@ -17,14 +17,14 @@
         android:textSize="30sp" />
 
     <Switch
-        android:text="@string/dark_mode"
-        android:textColor="?attr/primaryTextColor"
         android:id="@+id/themeSwitch"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:paddingEnd="30dp"
         android:layout_gravity="center"
+        android:paddingEnd="30dp"
+        android:text="@string/dark_mode"
+        android:textColor="?attr/primaryTextColor"
+        android:thumbTint="?attr/tabSelectedColor"
         tools:ignore="RtlSymmetry" />
-
 
 </LinearLayout>
