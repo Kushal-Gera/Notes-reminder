@@ -1,11 +1,13 @@
 package com.example.reminder;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
@@ -17,25 +19,30 @@ import com.example.reminder.TabFragments.TakeNotes;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.Map;
+import java.util.Set;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    public static final String FLAG = "flag";
+
+    public static final String SHARED_PREF = "shared_preference";
+    private static final String ITEM_ID = "item_id";
+    private static boolean IS_DARK = false;
 
     TabLayout tabs;
     ViewPager viewPager;
-    TextView changer;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getIntent().hasExtra(FLAG)){
-            if (getIntent().getBooleanExtra(FLAG, false))
-                setTheme(R.style.DarkTheme);
-            else
-                setTheme(R.style.AppTheme);
+        //change this to Delegate or shared preference.......
+        getSharedPrefData();
+        if (IS_DARK)
+            setTheme(R.style.DarkTheme);
+        else
+            setTheme(R.style.AppTheme);
 
-        }
         setContentView(R.layout.activity_main);
 
         tabs = findViewById(R.id.tabs);
@@ -45,6 +52,15 @@ public class MainActivity extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
 
 
+
+
+    }
+
+    private void getSharedPrefData() {
+
+        SharedPreferences preferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
+
+        IS_DARK = preferences.getBoolean(ITEM_ID, false);
 
 
     }
