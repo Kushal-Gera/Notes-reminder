@@ -1,26 +1,15 @@
 package com.example.reminder;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.view.View;
-import android.widget.TextView;
 
-import com.example.reminder.TabFragments.AddReminder;
+import com.example.reminder.TabFragments.Settings;
 import com.example.reminder.TabFragments.SavedNotes;
 import com.example.reminder.TabFragments.TakeNotes;
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.Map;
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -70,10 +59,9 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.addFrag(new TakeNotes(), "Take Notes");
         adapter.addFrag(new SavedNotes(), "Saved Notes");
-        adapter.addFrag(new AddReminder(), "Reminder");
+        adapter.addFrag(new Settings(), "Settings");
         viewPager.setAdapter(adapter);
     }
-
 
 
 

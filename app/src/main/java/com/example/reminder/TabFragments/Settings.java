@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.example.reminder.MainActivity;
 import com.example.reminder.R;
 
-public class AddReminder extends Fragment {
+public class Settings extends Fragment {
     public static final String SHARED_PREF = "shared_preference";
     private static final String ITEM_ID = "item_id";
     private static final String SWITCH_POS = "switch";
@@ -28,7 +26,7 @@ public class AddReminder extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.add_reminder, container, false);
+        final View view = inflater.inflate(R.layout.settings, container, false);
 
         themeSwitch = view.findViewById(R.id.themeSwitch);
         getPreviousData();

@@ -5,4 +5,5 @@
     <string name="take_notes">Take Notes</string>
     <string name="saved_notes">Saved Notes</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="settings_panel">SETTINGS PANEL</string>
 </resources>
