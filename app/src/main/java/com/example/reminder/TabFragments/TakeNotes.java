@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.reminder.MainActivity;
 import com.example.reminder.R;
+import com.example.reminder.SetReminder;
 
 public class TakeNotes extends Fragment {
     private static final String TAG = "TakeNotes";
@@ -29,7 +30,7 @@ public class TakeNotes extends Fragment {
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "add btn clicked", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), SetReminder.class));
             }
         });
 

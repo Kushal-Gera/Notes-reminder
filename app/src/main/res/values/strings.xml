@@ -6,4 +6,7 @@
     <string name="saved_notes">Saved Notes</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="settings_panel">SETTINGS PANEL</string>
+    <string name="enter_text">Enter Text Here</string>
+    <string name="save">save</string>
+    <string name="set_alarm">Set Alarm</string>
 </resources>

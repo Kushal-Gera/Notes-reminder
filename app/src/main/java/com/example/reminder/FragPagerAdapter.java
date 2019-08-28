@@ -37,7 +37,6 @@ public class FragPagerAdapter extends FragmentPagerAdapter {
 
         fragList.add(fragment);
         fragTitleList.add(title);
-
     }
 
 
