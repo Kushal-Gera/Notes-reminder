@@ -1,7 +1,9 @@
 package com.example.reminder;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import android.app.TimePickerDialog;
 import android.content.SharedPreferences;
 import android.opengl.ETC1;
 import android.os.Bundle;
@@ -9,11 +11,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
-public class SetReminder extends AppCompatActivity {
+public class SetReminder extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private static final String TAG = "SetReminder";
     public static final String SHARED_PREF = "shared_preference";
     private static final String ITEM_ID = "item_id";
@@ -22,6 +25,8 @@ public class SetReminder extends AppCompatActivity {
     Button save, alarm;
     EditText note;
 
+    private int hour;
+    private int minute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,16 @@ public class SetReminder extends AppCompatActivity {
             }
         });
 
+        alarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DialogFragment dialogFragment = new TimePickerFrag();
+                dialogFragment.show(getSupportFragmentManager(), "something");
+
+            }
+        });
+
 
 
 
@@ -63,7 +78,12 @@ public class SetReminder extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onTimeSet(TimePicker view, int hour, int minute) {
 
+        this.hour = hour;
+        this.minute = minute;
 
-
+        Toast.makeText(this, "hours is " + hour + " , minute is : " + minute, Toast.LENGTH_SHORT).show();
+    }
 }
