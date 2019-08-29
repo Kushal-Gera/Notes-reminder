@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.opengl.ETC1;
 import android.os.Bundle;
+import android.provider.AlarmClock;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +16,16 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import org.w3c.dom.Text;
+
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class SetReminder extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private static final String TAG = "SetReminder";
@@ -25,8 +36,8 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
     Button save, alarm;
     EditText note;
 
-    private int hour;
-    private int minute;
+    private int hour = 0;
+    private int minute = 15;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +60,10 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
                 final String note_string = note.getText().toString().trim();
 
                 if (!TextUtils.isEmpty(note_string)){
-
                     //do something
-                }else Toast.makeText(SetReminder.this,"Please Fill The Fields", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(SetReminder.this, "Saved", Toast.LENGTH_SHORT).show();
+                }else Toast.makeText(SetReminder.this,"Please Add Something", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -61,7 +73,7 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
             public void onClick(View v) {
 
                 DialogFragment dialogFragment = new TimePickerFrag();
-                dialogFragment.show(getSupportFragmentManager(), "something");
+                dialogFragment.show(getSupportFragmentManager(), "anything");
 
             }
         });
@@ -77,13 +89,21 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
         IS_DARK = preferences.getBoolean(ITEM_ID, false);
     }
 
-
     @Override
     public void onTimeSet(TimePicker view, int hour, int minute) {
 
         this.hour = hour;
         this.minute = minute;
 
-        Toast.makeText(this, "hours is " + hour + " , minute is : " + minute, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
+        intent.putExtra(AlarmClock.EXTRA_HOUR, hour);
+        intent.putExtra(AlarmClock.EXTRA_MINUTES, minute);
+        startActivity(intent);
     }
+
+
+
+
+
+
 }
