@@ -1,25 +1,35 @@
 package com.example.reminder.TabFragments;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.reminder.LoginAct;
 import com.example.reminder.MainActivity;
 import com.example.reminder.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Settings extends Fragment {
     public static final String SHARED_PREF = "shared_preference";
     private static final String ITEM_ID = "item_id";
     private static final String SWITCH_POS = "switch";
+
+    FirebaseAuth auth;
+
+    Button signout;
 
     private Switch themeSwitch;
 
@@ -40,6 +50,35 @@ public class Settings extends Fragment {
 
             }
         });
+
+        auth = FirebaseAuth.getInstance();
+
+        view.findViewById(R.id.signOut).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext() );
+                builder.setMessage("Do you really want to sign out ?")
+                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                auth.signOut();
+                                startActivity(new Intent(getActivity(), LoginAct.class));
+                                getActivity().finish();
+                            }
+                        })
+                        .setNegativeButton("no", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //nothing
+                            }
+                        })
+                        .setCancelable(true);
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
         return view;
     }
 

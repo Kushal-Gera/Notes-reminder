@@ -33,7 +33,6 @@ public class LoginAct extends AppCompatActivity {
     EditText phone, otp;
     Button login, getCode;
     ProgressBar progressBar;
-    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +40,12 @@ public class LoginAct extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() != null){
+            startActivity(new Intent(this, MainActivity.class));
+        }
 
         phone = findViewById(R.id.phone);
         otp = findViewById(R.id.otp);
-        spinner = findViewById(R.id.spinner);
         getCode = findViewById(R.id.getCode);
         login = findViewById(R.id.login_btn);
         login.setVisibility(View.INVISIBLE);
@@ -58,7 +59,7 @@ public class LoginAct extends AppCompatActivity {
                 String number = phone.getText().toString().trim();
                 if (!TextUtils.isEmpty(number) && number.length() > 9 ){
 
-                    getVerificationCode(number);
+                    getVerificationCode('+' + "91" + number);
 
                     progressBar.setVisibility(View.VISIBLE);
                     login.setVisibility(View.VISIBLE);
