@@ -70,7 +70,7 @@
             android:background="@drawable/btn_bg"
             android:text="@string/set_alarm"
             android:textAllCaps="false"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 

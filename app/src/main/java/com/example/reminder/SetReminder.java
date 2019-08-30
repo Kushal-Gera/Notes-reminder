@@ -17,6 +17,9 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
@@ -33,11 +36,12 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
     private static final String ITEM_ID = "item_id";
     private static boolean IS_DARK = false;
 
+    //firebase stuff
+    FirebaseAuth auth;
+    DatabaseReference ref;
+
     Button save, alarm;
     EditText note;
-
-    private int hour = 0;
-    private int minute = 15;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,8 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
         else
             setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_set_reminder);
+
+        // initialisations
 
         save = findViewById(R.id.save);
         alarm = findViewById(R.id.alarm);
@@ -71,15 +77,11 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
         alarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 DialogFragment dialogFragment = new TimePickerFrag();
                 dialogFragment.show(getSupportFragmentManager(), "anything");
 
             }
         });
-
-
-
 
     }
 
@@ -91,9 +93,6 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
 
     @Override
     public void onTimeSet(TimePicker view, int hour, int minute) {
-
-        this.hour = hour;
-        this.minute = minute;
 
         Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
         intent.putExtra(AlarmClock.EXTRA_HOUR, hour);

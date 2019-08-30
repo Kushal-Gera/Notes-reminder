@@ -26,7 +26,7 @@
         android:layout_marginBottom="10dp"
         android:text="@string/dark_mode"
         android:textColor="?attr/primaryTextColor"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:thumbTint="?attr/tabSelectedColor"
         tools:ignore="RtlSymmetry" />
 
@@ -44,20 +44,21 @@
             android:layout_weight="10"
             android:text="Build Version"
             android:textColor="?attr/primaryTextColor"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1.0.01"
             android:textColor="?attr/primaryTextColor"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:text="New Items Will Be Added Later"

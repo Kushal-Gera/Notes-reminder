@@ -8,5 +8,10 @@
     <string name="settings_panel">SETTINGS PANEL</string>
     <string name="enter_text">Enter Text Here</string>
     <string name="save">save</string>
-    <string name="set_alarm">Set Alarm</string>
+    <string name="set_alarm">With Alarm</string>
+    <string name="otp">OTP Received</string>
+    <string name="your_phone_number">Your Phone Number</string>
+    <string name="login_screen">LOGIN SCREEN</string>
+    <string name="login">Login</string>
+    <string name="get_code">Get Code</string>
 </resources>
