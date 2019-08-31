@@ -20,6 +20,7 @@ import com.example.reminder.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,15 +45,15 @@ public class SavedNotes extends Fragment {
 
         final View view = inflater.inflate(R.layout.saved_notes, container, false);
 
-        ref = FirebaseDatabase.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
-        ref.child("main").child(auth.getCurrentUser().getUid());
+
+        ref = FirebaseDatabase.getInstance().getReference().child("main").child(auth.getCurrentUser().getUid());
 
         recyclerView = view.findViewById(R.id.recycler_view);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext() );
-//        linearLayoutManager.setReverseLayout(true);
-//        linearLayoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext() ));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext() );
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         options  = new FirebaseRecyclerOptions.Builder<NoteExtractor>()
                          .setQuery(ref, NoteExtractor.class).build();
@@ -71,7 +72,6 @@ public class SavedNotes extends Fragment {
                             String note_text = String.valueOf(dataSnapshot.child("note").getValue());
 //                            Toast.makeText(getContext(), note_text, Toast.LENGTH_SHORT).show();
                             holder.saved_title.setText(note_text);
-
                         }
 
                         @Override
