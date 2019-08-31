@@ -69,7 +69,7 @@ public class SavedNotes extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            String note_text = String.valueOf(dataSnapshot.child("note").getValue());
+                            String note_text = String.valueOf(dataSnapshot.child(NOTE).getValue());
 //                            Toast.makeText(getContext(), note_text, Toast.LENGTH_SHORT).show();
                             holder.saved_title.setText(note_text);
                         }

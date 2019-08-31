@@ -86,7 +86,7 @@ public class Settings extends Fragment {
 
         SharedPreferences preferences = this.getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
 
-        boolean switch_now = preferences.getBoolean(SWITCH_POS, true);
+        boolean switch_now = preferences.getBoolean(SWITCH_POS, false);
 
         themeSwitch.setChecked(switch_now);
     }
@@ -97,7 +97,6 @@ public class Settings extends Fragment {
         SharedPreferences.Editor editor = preferences.edit();
 
         if (themeSwitch.isChecked() ){
-
             editor.putBoolean(ITEM_ID, true);
             editor.putBoolean(SWITCH_POS, true);
         }
