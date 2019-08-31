@@ -75,7 +75,7 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
                     saveData(note_string);
                     Toast.makeText(SetReminder.this, "Saved", Toast.LENGTH_SHORT).show();
                     onBackPressed();
-                }else Toast.makeText(SetReminder.this,"Please Add Something", Toast.LENGTH_SHORT).show();
+                }else Toast.makeText(SetReminder.this,"Please Add Some Text", Toast.LENGTH_SHORT).show();
 
             }
         });
