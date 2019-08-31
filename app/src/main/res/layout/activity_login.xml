@@ -10,10 +10,10 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="200dp"
         android:contentDescription="@string/description"
         android:scaleType="fitXY"
-        android:src="@drawable/login_img"
+        android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,6 +33,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:layout_marginTop="50dp"
         android:id="@+id/phone"
         android:layout_width="300dp"
         android:layout_height="50dp"

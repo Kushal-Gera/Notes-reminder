@@ -1,96 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/backgroundColor"
+    android:paddingBottom="40dp"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/themeChanger"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:gravity="center"
-        android:text="@string/settings_panel"
-        android:textColor="?attr/primaryTextColor"
-        android:textSize="30sp" />
-
-    <Switch
-        android:id="@+id/themeSwitch"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/dark_mode"
-        android:textColor="?attr/primaryTextColor"
-        android:textSize="18sp"
-        android:thumbTint="?attr/tabSelectedColor"
-        tools:ignore="RtlSymmetry" />
-
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/themeChanger"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
-            android:text="Build Version"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:text="@string/settings_panel"
             android:textColor="?attr/primaryTextColor"
-            android:textSize="18sp" />
+            android:textSize="30sp" />
+
+        <Switch
+            android:id="@+id/themeSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/dark_mode"
+            android:textColor="?attr/primaryTextColor"
+            android:textSize="18sp"
+            android:thumbTint="?attr/tabSelectedColor"
+            tools:ignore="RtlSymmetry" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="Build Version"
+                android:textColor="?attr/primaryTextColor"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1.0.01"
+                android:textColor="?attr/primaryTextColor"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/signOut"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="Sign Out"
+                android:textColor="?attr/primaryTextColor"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=". . ."
+                android:layout_marginTop="-5dp"
+                android:layout_marginEnd="8dp"
+                android:textColor="?attr/primaryTextColor"
+                android:textSize="28sp" />
+
+        </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1.0.01"
-            android:textColor="?attr/primaryTextColor"
-            android:textSize="18sp" />
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:text="New Items Will Be Added Later"
+            android:textColor="?attr/secTextColor"
+            android:textSize="25sp" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="50dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/signOut"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="10"
-            android:text="Sign Out"
-            android:textColor="?attr/primaryTextColor"
-            android:textSize="18sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=". . ."
-            android:layout_marginTop="-5dp"
-            android:layout_marginEnd="8dp"
-            android:textColor="?attr/primaryTextColor"
-            android:textSize="28sp" />
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:text="New Items Will Be Added Later"
-        android:textColor="?attr/secTextColor"
-        android:textSize="25sp" />
-
-</LinearLayout>
+</ScrollView>
