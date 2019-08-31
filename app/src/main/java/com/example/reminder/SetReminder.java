@@ -32,6 +32,8 @@ import java.util.Locale;
 
 public class SetReminder extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private static final String TAG = "SetReminder";
+
+    private static final String NOTE = "note";
     public static final String SHARED_PREF = "shared_preference";
     private static final String ITEM_ID = "item_id";
     private static boolean IS_DARK = false;
@@ -56,6 +58,9 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
 
         // initialisations
 
+        auth = FirebaseAuth.getInstance();
+        ref = FirebaseDatabase.getInstance().getReference();
+
         save = findViewById(R.id.save);
         alarm = findViewById(R.id.alarm);
         note = findViewById(R.id.note);
@@ -67,8 +72,9 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
 
                 if (!TextUtils.isEmpty(note_string)){
                     //do something
-
+                    saveData(note_string);
                     Toast.makeText(SetReminder.this, "Saved", Toast.LENGTH_SHORT).show();
+                    onBackPressed();
                 }else Toast.makeText(SetReminder.this,"Please Add Something", Toast.LENGTH_SHORT).show();
 
             }
@@ -77,11 +83,21 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
         alarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment dialogFragment = new TimePickerFrag();
-                dialogFragment.show(getSupportFragmentManager(), "anything");
+                final String note_string = note.getText().toString().trim();
+                if (!TextUtils.isEmpty(note_string)) {
+                    saveData(note_string);
 
+                    DialogFragment dialogFragment = new TimePickerFrag();
+                    dialogFragment.show(getSupportFragmentManager(), "anything");
+                }
             }
         });
+
+    }
+
+    private void saveData(String data) {
+
+        ref.child("main").child(auth.getCurrentUser().getUid()).push().child(NOTE).setValue(data);
 
     }
 

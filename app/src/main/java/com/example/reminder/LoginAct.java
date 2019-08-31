@@ -42,6 +42,7 @@ public class LoginAct extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null){
             startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
 
         phone = findViewById(R.id.phone);
