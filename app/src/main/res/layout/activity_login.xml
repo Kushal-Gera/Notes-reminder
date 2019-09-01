@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F3F3F5"
+    android:elevation="0dp"
     tools:context=".LoginAct">
 
     <ImageView
@@ -13,7 +14,7 @@
         android:layout_height="200dp"
         android:contentDescription="@string/description"
         android:scaleType="fitXY"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/login_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
