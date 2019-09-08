@@ -2,7 +2,7 @@ package com.example.reminder;
 
 public class NoteExtractor {
 
-    String note;
+    private String note;
 
     public String getNote() {
         return note;

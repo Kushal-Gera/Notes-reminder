@@ -1,20 +1,17 @@
 package com.example.reminder;
 
+import android.content.SharedPreferences;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.SharedPreferences;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.Window;
-
-import com.example.reminder.TabFragments.Settings;
 import com.example.reminder.TabFragments.SavedNotes;
+import com.example.reminder.TabFragments.Settings;
 import com.example.reminder.TabFragments.TakeNotes;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
 
     public static final String SHARED_PREF = "shared_preference";
     private static final String ITEM_ID = "item_id";
@@ -49,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         IS_DARK = preferences.getBoolean(ITEM_ID, false);
     }
 
-    private void addtabs(){
+    private void addtabs() {
         FragPagerAdapter adapter = new FragPagerAdapter(getSupportFragmentManager());
 
         adapter.addFrag(new TakeNotes(), "Take Notes");
@@ -57,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFrag(new Settings(), "Settings");
         viewPager.setAdapter(adapter);
     }
-
 
 
 }

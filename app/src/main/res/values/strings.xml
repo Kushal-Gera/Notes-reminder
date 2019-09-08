@@ -14,4 +14,5 @@
     <string name="login_screen">LOGIN SCREEN</string>
     <string name="login">Login</string>
     <string name="get_code">Get Code</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

@@ -13,7 +13,7 @@ public class FragPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragList = new ArrayList<>();
     private List<String> fragTitleList = new ArrayList<>();
 
-    public FragPagerAdapter(FragmentManager fm) {
+    FragPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
@@ -33,7 +33,7 @@ public class FragPagerAdapter extends FragmentPagerAdapter {
         return fragTitleList.get(position);
     }
 
-    public void addFrag(Fragment fragment, String title){
+    void addFrag(Fragment fragment, String title){
 
         fragList.add(fragment);
         fragTitleList.add(title);

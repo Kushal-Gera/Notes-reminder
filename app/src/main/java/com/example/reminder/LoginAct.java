@@ -1,8 +1,5 @@
 package com.example.reminder;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,8 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,7 +24,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import java.util.concurrent.TimeUnit;
 
 public class LoginAct extends AppCompatActivity {
-    private static final String TAG = "LoginAct";
+    //    private static final String TAG = "LoginAct";
     private static String VERIFICATION_ID;
 
     FirebaseAuth auth;
@@ -40,7 +39,7 @@ public class LoginAct extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         auth = FirebaseAuth.getInstance();
-        if (auth.getCurrentUser() != null){
+        if (auth.getCurrentUser() != null) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
@@ -58,14 +57,14 @@ public class LoginAct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String number = phone.getText().toString().trim();
-                if (!TextUtils.isEmpty(number) && number.length() > 9 ){
+                if (!TextUtils.isEmpty(number) && number.length() > 9) {
 
                     getVerificationCode('+' + "91" + number);
 
                     progressBar.setVisibility(View.VISIBLE);
                     login.setVisibility(View.VISIBLE);
                     getCode.setVisibility(View.INVISIBLE);
-                }else {
+                } else {
                     phone.setError("Phone Number Required");
                     phone.requestFocus();
                 }
@@ -82,9 +81,6 @@ public class LoginAct extends AppCompatActivity {
         });
 
 
-
-
-
     }
 
     private void verifyCode(String userCode) {
@@ -99,11 +95,11 @@ public class LoginAct extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             startActivity(new Intent(LoginAct.this, MainActivity.class));
                             finish();
 
-                        }else
+                        } else
                             Toast.makeText(LoginAct.this, "ERROR OCCURRED", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -113,11 +109,11 @@ public class LoginAct extends AppCompatActivity {
 
     private void getVerificationCode(String phoneNumber) {
 
-        PhoneAuthProvider .getInstance().verifyPhoneNumber(phoneNumber,
-                                                            60,
-                                                            TimeUnit.SECONDS,
-                                                            TaskExecutors.MAIN_THREAD,
-                                                            mCallbacks);
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(phoneNumber,
+                60,
+                TimeUnit.SECONDS,
+                TaskExecutors.MAIN_THREAD,
+                mCallbacks);
 
     }
 
@@ -125,7 +121,7 @@ public class LoginAct extends AppCompatActivity {
         @Override
         public void onVerificationCompleted(PhoneAuthCredential credential) {
             String userCode = credential.getSmsCode();
-            if (userCode != null){
+            if (userCode != null) {
                 otp.setText(userCode);
                 verifyCode(userCode);
             }
@@ -134,7 +130,7 @@ public class LoginAct extends AppCompatActivity {
 
         @Override
         public void onVerificationFailed(FirebaseException e) {
-            Toast.makeText(LoginAct.this, e.getMessage().toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(LoginAct.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -147,7 +143,6 @@ public class LoginAct extends AppCompatActivity {
 
 
     };
-
 
 
 }

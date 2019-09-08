@@ -1,12 +1,8 @@
 package com.example.reminder;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.opengl.ETC1;
 import android.os.Bundle;
 import android.provider.AlarmClock;
 import android.text.TextUtils;
@@ -16,19 +12,14 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
-
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+import java.util.Objects;
 
 public class SetReminder extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private static final String TAG = "SetReminder";
@@ -97,7 +88,7 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
 
     private void saveData(String data) {
 
-        ref.child("main").child(auth.getCurrentUser().getUid()).push().child(NOTE).setValue(data);
+        ref.child("main").child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).push().child(NOTE).setValue(data);
 
     }
 

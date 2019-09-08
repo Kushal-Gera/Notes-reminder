@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/backgroundColor"
+    android:overScrollMode="never"
     android:orientation="vertical">
 
     <LinearLayout
@@ -73,7 +74,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                android:text="Sign Out"
+                android:text="@string/sign_out"
                 android:textColor="?attr/primaryTextColor"
                 android:textSize="18sp" />
 
@@ -82,9 +83,9 @@
                 android:layout_height="wrap_content"
                 android:text=". . ."
                 android:layout_marginTop="-5dp"
-                android:layout_marginEnd="8dp"
                 android:textColor="?attr/primaryTextColor"
-                android:textSize="28sp" />
+                android:textSize="28sp"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
 
