@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         addtabs();
         tabs.setupWithViewPager(viewPager);
 
+
     }
 
     private void getSharedPrefData() {
@@ -53,6 +54,17 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFrag(new SavedNotes(), "Saved Notes");
         adapter.addFrag(new Settings(), "Settings");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (viewPager.getCurrentItem() == 1)
+            viewPager.setCurrentItem(0);
+        else if (viewPager.getCurrentItem() == 2)
+            viewPager.setCurrentItem(1);
+        else
+            super.onBackPressed();
     }
 
 
