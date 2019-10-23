@@ -49,7 +49,6 @@
                     android:layout_weight="10"
                     android:textColor="?attr/secTextColor"
                     android:textSize="20sp"
-                    android:textStyle="bold"
                     tools:text="Title is here and to.." />
 
             </LinearLayout>

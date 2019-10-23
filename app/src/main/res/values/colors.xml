@@ -9,6 +9,6 @@
     <color name="colorGray">#2c2c2c</color>
 
     <color name="colorPrimText">#212121</color>
-    <color name="colorSecText">#757575</color>
+    <color name="colorSecText">#333</color>
 
 </resources>

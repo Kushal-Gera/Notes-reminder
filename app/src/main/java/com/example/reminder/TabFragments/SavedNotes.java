@@ -1,6 +1,8 @@
 package com.example.reminder.TabFragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +44,8 @@ public class SavedNotes extends Fragment {
     FirebaseRecyclerOptions<NoteExtractor> options;
     FirebaseRecyclerAdapter<NoteExtractor, NoteViewHolder> adapter;
 
+    TextToSpeech tts;
+
 
     @Nullable
     @Override
@@ -75,8 +79,8 @@ public class SavedNotes extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            String note_text = String.valueOf(dataSnapshot.child(NOTE).getValue());
-                            String desc_text = String.valueOf(dataSnapshot.child(DESC_NOTE).getValue());
+                            final String note_text = String.valueOf(dataSnapshot.child(NOTE).getValue());
+                            final String desc_text = String.valueOf(dataSnapshot.child(DESC_NOTE).getValue());
                             animationView.setVisibility(View.GONE);
 
                             holder.saved_title.setText(note_text);
@@ -92,7 +96,16 @@ public class SavedNotes extends Fragment {
                             holder.speak.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    speak_now();
+                                    tts = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
+                                        @Override
+                                        public void onInit(int status) {
+
+                                            if(status != TextToSpeech.SUCCESS)
+                                                return;
+                                            speak_now(note_text);
+                                    }
+                                });
+
                                 }
                             });
 
@@ -122,12 +135,24 @@ public class SavedNotes extends Fragment {
         return view;
     }
 
-    private void speak_now() {
+    private void speak_now(final String data) {
 
-
-
+        tts.speak(data, TextToSpeech.QUEUE_FLUSH, null);
 
     }
+
+    @Override
+    public void onStop() {
+
+        if (tts != null){
+            tts.stop();
+            tts.shutdown();
+        }
+
+        super.onStop();
+    }
+
+
 
 
 }
