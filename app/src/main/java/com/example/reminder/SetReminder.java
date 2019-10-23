@@ -117,8 +117,9 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
 
     private void saveData(String data, String desc) {
 
-        ref.child("main").child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).push().child(NOTE).setValue(data);
-        ref.child("main").child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).push().child(DESC_NOTE).setValue(desc);
+        DatabaseReference new_ref = ref.child("main").child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).push();
+        new_ref.child(NOTE).setValue(data);
+        new_ref.child(DESC_NOTE).setValue(desc);
 
     }
 

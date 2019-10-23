@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.reminder.NoteExtractor;
 import com.example.reminder.NoteViewHolder;
 import com.example.reminder.R;
@@ -30,10 +31,13 @@ import com.google.firebase.database.ValueEventListener;
 public class SavedNotes extends Fragment {
     private static final String TAG = "SavedNotes";
     private static final String NOTE = "note";
+    private static final String DESC_NOTE = "desc_note";
 
     private RecyclerView recyclerView;
     private FirebaseAuth auth;
     private DatabaseReference ref;
+
+    LottieAnimationView animationView;
 
     FirebaseRecyclerOptions<NoteExtractor> options;
     FirebaseRecyclerAdapter<NoteExtractor, NoteViewHolder> adapter;
@@ -48,6 +52,8 @@ public class SavedNotes extends Fragment {
         auth = FirebaseAuth.getInstance();
 
         ref = FirebaseDatabase.getInstance().getReference().child("main").child(auth.getCurrentUser().getUid());
+
+        animationView = view.findViewById(R.id.animation_view);
 
         recyclerView = view.findViewById(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext() );
@@ -70,13 +76,23 @@ public class SavedNotes extends Fragment {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                             String note_text = String.valueOf(dataSnapshot.child(NOTE).getValue());
-//                            Toast.makeText(getContext(), note_text, Toast.LENGTH_SHORT).show();
+                            String desc_text = String.valueOf(dataSnapshot.child(DESC_NOTE).getValue());
+                            animationView.setVisibility(View.GONE);
+
                             holder.saved_title.setText(note_text);
+                            holder.saved_desc.setText(desc_text);
 
                             holder.cross.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     ref.child(newNode).removeValue();
+                                }
+                            });
+
+                            holder.speak.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    speak_now();
                                 }
                             });
 
@@ -89,7 +105,6 @@ public class SavedNotes extends Fragment {
                     });
 
                 }
-
 
             }
 
@@ -107,6 +122,12 @@ public class SavedNotes extends Fragment {
         return view;
     }
 
+    private void speak_now() {
+
+
+
+
+    }
 
 
 }
