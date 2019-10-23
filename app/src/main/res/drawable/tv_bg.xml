@@ -5,6 +5,6 @@
         android:color="?attr/accentColor"/>
 
     <corners
-        android:radius="20dp"/>
+        android:radius="25dp"/>
 
 </shape>

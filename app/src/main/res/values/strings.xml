@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Reminder</string>
+    <string name="app_name">Task Reminder</string>
     <string name="description">description</string>
     <string name="add">Add Here</string>
     <string name="take_notes">Take Notes</string>
     <string name="saved_notes">Saved Notes</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="settings_panel">SETTINGS PANEL</string>
-    <string name="enter_text">Enter Text Here</string>
+    <string name="enter_text">Enter Note*</string>
     <string name="save">save</string>
     <string name="set_alarm">With Alarm</string>
     <string name="otp">OTP Received</string>
@@ -15,4 +15,5 @@
     <string name="login">Login</string>
     <string name="get_code">Get Code</string>
     <string name="sign_out">Sign Out</string>
+    <string name="enter_description">Enter Description</string>
 </resources>
