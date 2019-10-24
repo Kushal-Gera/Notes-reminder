@@ -54,10 +54,10 @@
 
         <ImageView
             android:id="@+id/listen"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
@@ -66,25 +66,46 @@
 
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/note_desc"
+    <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="65dp"
-        android:hint="@string/enter_description"
-        android:importantForAutofill="no"
-        android:inputType="textMultiLine|text"
-        android:lineSpacingExtra="2dp"
-        android:paddingStart="10dp"
-        android:textColor="?attr/primaryTextColor"
-        android:textColorHint="?attr/secTextColor"
-        android:textSize="22sp"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        tools:ignore="RtlSymmetry" />
+        tools:ignore="RtlSymmetry">
+
+        <EditText
+            android:id="@+id/note_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:hint="@string/enter_description"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine|text"
+            android:lineSpacingExtra="2dp"
+            android:paddingStart="10dp"
+            android:textColor="?attr/primaryTextColor"
+            android:textColorHint="?attr/secTextColor"
+            android:textSize="22sp"
+            tools:ignore="RtlSymmetry" />
+
+        <ImageView
+            android:id="@+id/swap"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:contentDescription="@string/description"
+            android:src="@drawable/swap" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"

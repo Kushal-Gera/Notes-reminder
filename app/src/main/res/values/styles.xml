@@ -4,7 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
         <item name="backgroundColor">#FAFAFA</item>
-        <item name="cardBackgroundColor">#FFFFFF</item>
+        <item name="cardBackgroundColor">@color/colorAccent</item>
         <item name="tabSelectedColor">@color/colorGray</item>
         <item name="accentColor">@color/colorAccent</item>
 
@@ -13,6 +13,8 @@
 
         <item name="primaryTextColor">@color/colorPrimText</item>
         <item name="secTextColor">@color/colorSecText</item>
+
+        <item name="android:statusBarColor">#29B6F6</item>
     </style>
 
 
@@ -28,7 +30,9 @@
         <item name="primaryDarkColor">@color/colorBlack</item>
 
         <item name="primaryTextColor">@color/colorWhite</item>
-        <item name="secTextColor">#CBCBCB</item>
+        <item name="secTextColor">#BBB</item>
+
+        <item name="android:statusBarColor">#3C3F41</item>
     </style>
 
 

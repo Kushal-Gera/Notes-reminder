@@ -41,7 +41,7 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
 
     Button save, alarm;
     EditText note, note_desc;
-    ImageView listen;
+    ImageView listen, swap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +60,7 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
         ref = FirebaseDatabase.getInstance().getReference();
 
         save = findViewById(R.id.save);
+        swap = findViewById(R.id.swap);
         alarm = findViewById(R.id.alarm);
         note = findViewById(R.id.note);
         note_desc = findViewById(R.id.note_desc);
@@ -112,6 +113,23 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
             }
         });
 
+        swap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                swap_it();
+            }
+        });
+
+
+    }
+
+    private void swap_it() {
+
+        String temp = "";
+
+        temp = note.getText().toString();
+        note.setText(note_desc.getText().toString());
+        note_desc.setText(temp);
 
     }
 
@@ -136,6 +154,7 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
         intent.putExtra(AlarmClock.EXTRA_HOUR, hour);
         intent.putExtra(AlarmClock.EXTRA_MINUTES, minute);
         startActivity(intent);
+        finish();
 
     }
 

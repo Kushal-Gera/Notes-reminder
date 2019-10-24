@@ -13,7 +13,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="?attr/accentColor"
+        app:cardBackgroundColor="?attr/cardBackgroundColor"
         app:cardCornerRadius="15dp">
 
         <LinearLayout
@@ -59,23 +59,23 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/cross"
+                    android:id="@+id/speak"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:contentDescription="@string/description"
-                    android:src="@drawable/cross" />
+                    android:src="@drawable/speak" />
 
                 <ImageView
-                    android:id="@+id/speak"
+                    android:id="@+id/cross"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="8dp"
                     android:contentDescription="@string/description"
-                    android:src="@drawable/speak" />
+                    android:src="@drawable/cross" />
 
             </LinearLayout>
 
