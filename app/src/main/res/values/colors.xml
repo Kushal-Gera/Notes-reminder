@@ -10,5 +10,6 @@
 
     <color name="colorPrimText">#121212</color>
     <color name="colorSecText">#777</color>
+    <color name="red_color">#E1384A</color>
 
 </resources>

@@ -1,7 +1,9 @@
 package com.example.reminder.TabFragments;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +25,7 @@ import com.example.reminder.NoteViewHolder;
 import com.example.reminder.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -45,6 +49,8 @@ public class SavedNotes extends Fragment {
     FirebaseRecyclerAdapter<NoteExtractor, NoteViewHolder> adapter;
 
     TextToSpeech tts;
+
+    ItemTouchHelper.Callback callback;
 
 
     @Nullable
@@ -131,6 +137,40 @@ public class SavedNotes extends Fragment {
 
         adapter.startListening();
         recyclerView.setAdapter(adapter);
+
+        view.findViewById(R.id.savedNotes).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.setVisibility(View.INVISIBLE);
+
+                final Handler h = new Handler();
+                h.postDelayed( new Runnable() {
+                    @Override
+                    public void run() {
+                        ref.removeValue();
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                recyclerView.setVisibility(View.VISIBLE);
+                            }
+                        }, 1000);
+
+                    }
+                }, 2500);
+
+                Snackbar.make(recyclerView, "All Notes Deleted", Snackbar.LENGTH_LONG)
+                        .setAction("UNDO   ", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                h.removeCallbacksAndMessages(null);
+                                recyclerView.setVisibility(View.VISIBLE);
+                            }
+                        })
+                        .setActionTextColor(getResources().getColor(R.color.colorPrimary))
+                        .show();
+            }
+        });
 
         return view;
     }
