@@ -1,7 +1,5 @@
 package com.example.reminder.TabFragments;
 
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
@@ -9,8 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +24,6 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,6 +47,7 @@ public class SavedNotes extends Fragment {
     TextToSpeech tts;
 
     ItemTouchHelper.Callback callback;
+    ImageView savedNotes;
 
 
     @Nullable
@@ -64,15 +61,16 @@ public class SavedNotes extends Fragment {
         ref = FirebaseDatabase.getInstance().getReference().child("main").child(auth.getCurrentUser().getUid());
 
         animationView = view.findViewById(R.id.animation_view);
+        savedNotes = view.findViewById(R.id.savedNotes);
 
         recyclerView = view.findViewById(R.id.recycler_view);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext() );
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        options  = new FirebaseRecyclerOptions.Builder<NoteExtractor>()
-                         .setQuery(ref, NoteExtractor.class).build();
+        options = new FirebaseRecyclerOptions.Builder<NoteExtractor>()
+                .setQuery(ref, NoteExtractor.class).build();
 
         adapter = new FirebaseRecyclerAdapter<NoteExtractor, NoteViewHolder>(options) {
             @Override
@@ -80,7 +78,8 @@ public class SavedNotes extends Fragment {
 
                 final String newNode = getRef(i).getKey();
 
-                if (newNode != null){
+                if (newNode != null) {
+                    savedNotes.setVisibility(View.VISIBLE);
                     ref.child(newNode).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -106,11 +105,11 @@ public class SavedNotes extends Fragment {
                                         @Override
                                         public void onInit(int status) {
 
-                                            if(status != TextToSpeech.SUCCESS)
+                                            if (status != TextToSpeech.SUCCESS)
                                                 return;
                                             speak_now(note_text);
-                                    }
-                                });
+                                        }
+                                    });
 
                                 }
                             });
@@ -119,7 +118,7 @@ public class SavedNotes extends Fragment {
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Log.e(TAG, "onCancelled: ERROR OCCURRED" );
+                            Log.e(TAG, "onCancelled: ERROR OCCURRED");
                         }
                     });
 
@@ -138,17 +137,17 @@ public class SavedNotes extends Fragment {
         adapter.startListening();
         recyclerView.setAdapter(adapter);
 
-        view.findViewById(R.id.savedNotes).setOnClickListener(new View.OnClickListener() {
+        savedNotes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 recyclerView.setVisibility(View.INVISIBLE);
 
                 final Handler h = new Handler();
-                h.postDelayed( new Runnable() {
+                h.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         ref.removeValue();
-
+                        savedNotes.setVisibility(View.GONE);
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -184,15 +183,13 @@ public class SavedNotes extends Fragment {
     @Override
     public void onStop() {
 
-        if (tts != null){
+        if (tts != null) {
             tts.stop();
             tts.shutdown();
         }
 
         super.onStop();
     }
-
-
 
 
 }

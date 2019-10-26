@@ -15,5 +15,5 @@
     <string name="get_code">Get Code</string>
     <string name="sign_out">Sign Out</string>
     <string name="enter_description">Enter Description</string>
-    <string name="t_t_t_tsaved_notes">Saved Notes</string>
+    <string name="saved_notes">Saved Notes</string>
 </resources>

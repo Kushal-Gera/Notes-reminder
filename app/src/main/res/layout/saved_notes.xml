@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/backgroundColor">
@@ -20,9 +21,11 @@
             android:layout_margin="8dp"
             android:layout_weight="9"
             android:gravity="center"
-            android:text="@string/t_t_t_tsaved_notes"
+            android:paddingStart="20dp"
+            android:text="@string/saved_notes"
             android:textColor="?attr/primaryTextColor"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            tools:ignore="RtlSymmetry" />
 
         <ImageView
             android:id="@+id/savedNotes"
@@ -31,10 +34,11 @@
             android:layout_weight="1"
             android:contentDescription="@string/description"
             android:paddingStart="3dp"
+            android:paddingTop="5dp"
             android:paddingEnd="3dp"
             android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:src="@drawable/delete" />
+            android:src="@drawable/delete"
+            android:visibility="gone" />
 
     </LinearLayout>
 
