@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#03A9F4</color>
     <color name="colorPrimaryDark">#0288D1</color>
-    <color name="colorAccent">#BBDEFB</color>
+    <color name="colorAccent">#B3E5FC</color>
 
     <color name="colorWhite">#FFF</color>
     <color name="colorBlack">#000</color>
@@ -10,6 +10,12 @@
 
     <color name="colorPrimText">#121212</color>
     <color name="colorSecText">#777</color>
+
     <color name="red_color">#E1384A</color>
+
+    <color name="pink_note">#EC407A</color>
+    <color name="orange_note">#FF7043</color>
+    <color name="yellow_note">#FFCA28</color>
+    <color name="green_note">#26A69A</color>
 
 </resources>

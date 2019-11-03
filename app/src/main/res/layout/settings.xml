@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/backgroundColor"
-    android:overScrollMode="never"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:overScrollMode="never">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/themeChanger"
@@ -48,16 +48,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                android:text="Build Version"
+                android:text="@string/build_version"
                 android:textColor="?attr/primaryTextColor"
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/version"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1.0.01"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:gravity="center"
                 android:textColor="?attr/primaryTextColor"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:text="1.0.01" />
 
         </LinearLayout>
 
@@ -73,16 +77,17 @@
                 android:id="@+id/signOut"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="10"
                 android:text="@string/sign_out"
                 android:textColor="?attr/primaryTextColor"
                 android:textSize="18sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=". . ."
-                android:layout_marginTop="-5dp"
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/signout"
                 android:textColor="?attr/primaryTextColor"
                 android:textSize="28sp"
                 tools:ignore="HardcodedText" />
@@ -92,8 +97,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
             android:text="New Items Will Be Added Later"
             android:textColor="?attr/secTextColor"

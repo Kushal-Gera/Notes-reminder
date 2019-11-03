@@ -16,4 +16,5 @@
     <string name="sign_out">Sign Out</string>
     <string name="enter_description">Enter Description</string>
     <string name="saved_notes">Saved Notes</string>
+    <string name="build_version">Build Version</string>
 </resources>

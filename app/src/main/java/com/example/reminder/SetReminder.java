@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Random;
 
 public class SetReminder extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private static final String TAG = "SetReminder";
@@ -33,6 +34,7 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
     private static final String DESC_NOTE = "desc_note";
     public static final String SHARED_PREF = "shared_preference";
     private static final String ITEM_ID = "item_id";
+    private static final String COLOR = "color";
     private static boolean IS_DARK = false;
 
     //firebase stuff
@@ -72,7 +74,7 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
                 final String note_string = note.getText().toString().trim();
                 String desc = note_desc.getText().toString().trim();
 
-                if (!TextUtils.isEmpty(note_string)){
+                if (!TextUtils.isEmpty(note_string)) {
                     //do something
                     if (TextUtils.isEmpty(note_desc.getText()))
                         desc = "";
@@ -80,8 +82,7 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
                     saveData(note_string, desc);
                     Toast.makeText(SetReminder.this, "Saved", Toast.LENGTH_SHORT).show();
                     onBackPressed();
-                }
-                else
+                } else
                     note.setError("Required !!");
             }
         });
@@ -100,8 +101,7 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
 
                     DialogFragment dialogFragment = new TimePickerFrag();
                     dialogFragment.show(getSupportFragmentManager(), "anything");
-                }
-                else
+                } else
                     note.setError("Required !!");
             }
         });
@@ -138,6 +138,7 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
         DatabaseReference new_ref = ref.child("main").child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).push();
         new_ref.child(NOTE).setValue(data);
         new_ref.child(DESC_NOTE).setValue(desc);
+        new_ref.child(COLOR).setValue(new Random().nextInt(100) % 4);
 
     }
 
@@ -169,7 +170,7 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
 
             startActivityForResult(intent, 1);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(this, "ERROR\n" + e.getMessage().toString(), Toast.LENGTH_SHORT).show();
         }
 
@@ -178,7 +179,7 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        if (resultCode == RESULT_OK && data!=null){
+        if (resultCode == RESULT_OK && data != null) {
 
             ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
@@ -187,7 +188,6 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
 
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 
 
 }

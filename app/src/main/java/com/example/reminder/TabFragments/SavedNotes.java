@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,20 +33,20 @@ public class SavedNotes extends Fragment {
     private static final String TAG = "SavedNotes";
     private static final String NOTE = "note";
     private static final String DESC_NOTE = "desc_note";
+    private static final String COLOR = "color";
 
     private RecyclerView recyclerView;
     private FirebaseAuth auth;
     private DatabaseReference ref;
 
-    LottieAnimationView animationView;
+    private LottieAnimationView animationView;
 
-    FirebaseRecyclerOptions<NoteExtractor> options;
-    FirebaseRecyclerAdapter<NoteExtractor, NoteViewHolder> adapter;
+    private FirebaseRecyclerOptions<NoteExtractor> options;
+    private FirebaseRecyclerAdapter<NoteExtractor, NoteViewHolder> adapter;
 
-    TextToSpeech tts;
+    private TextToSpeech tts;
 
-    ItemTouchHelper.Callback callback;
-    ImageView savedNotes;
+    private ImageView savedNotes;
 
 
     @Nullable
@@ -63,6 +62,12 @@ public class SavedNotes extends Fragment {
         animationView = view.findViewById(R.id.animation_view);
         savedNotes = view.findViewById(R.id.savedNotes);
 
+        final int[] colorArray = new int[]{
+                R.color.pink_note,
+                R.color.orange_note,
+                R.color.yellow_note,
+                R.color.green_note};
+
         recyclerView = view.findViewById(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setStackFromEnd(true);
@@ -74,7 +79,7 @@ public class SavedNotes extends Fragment {
 
         adapter = new FirebaseRecyclerAdapter<NoteExtractor, NoteViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull final NoteViewHolder holder, int i, @NonNull NoteExtractor noteExtractor) {
+            protected void onBindViewHolder(@NonNull final NoteViewHolder holder, final int i, @NonNull NoteExtractor noteExtractor) {
 
                 final String newNode = getRef(i).getKey();
 
@@ -90,6 +95,15 @@ public class SavedNotes extends Fragment {
 
                             holder.saved_title.setText(note_text);
                             holder.saved_desc.setText(desc_text);
+
+                            try {
+                                int r = Integer.parseInt(String.valueOf(dataSnapshot.child(COLOR).getValue()));
+                                holder.frame_color
+                                        .setBackgroundColor(getContext().getResources().getColor(colorArray[r]));
+                            }
+                            catch (NullPointerException | NumberFormatException e) {
+                                e.printStackTrace();
+                            }
 
                             holder.cross.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -123,7 +137,6 @@ public class SavedNotes extends Fragment {
                     });
 
                 }
-
             }
 
             @NonNull
@@ -159,7 +172,7 @@ public class SavedNotes extends Fragment {
                 }, 2500);
 
                 Snackbar.make(recyclerView, "All Notes Deleted", Snackbar.LENGTH_LONG)
-                        .setAction("UNDO   ", new View.OnClickListener() {
+                        .setAction("Undo    ", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 h.removeCallbacksAndMessages(null);
