@@ -13,9 +13,9 @@
 
     <color name="red_color">#E1384A</color>
 
-    <color name="pink_note">#EC407A</color>
+    <color name="pink_note">#7D8CDF</color>
     <color name="orange_note">#FF7043</color>
-    <color name="yellow_note">#FFCA28</color>
-    <color name="green_note">#26A69A</color>
+    <color name="yellow_note">#FFAF60</color>
+    <color name="green_note">#49CFAC</color>
 
 </resources>
