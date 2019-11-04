@@ -2,20 +2,19 @@ package com.example.reminder.TabFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.reminder.MainActivity;
 import com.example.reminder.R;
 import com.example.reminder.SetReminder;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
 
 public class TakeNotes extends Fragment {
     private static final String TAG = "TakeNotes";
@@ -34,10 +33,24 @@ public class TakeNotes extends Fragment {
             }
         });
 
+        TapTargetView.showFor(getActivity(),
+                TapTarget.forView(view.findViewById(R.id.add_btn), "Click Here\nto Add Notes")
+                        .cancelable(true)
+                        .outerCircleColor(R.color.colorPrimary)
+                        .outerCircleAlpha(0.6f)
+                        .targetCircleColor(R.color.colorWhite)
+                        .targetRadius(50)
+                        .tintTarget(true)
+                        .transparentTarget(true)
+                        .dimColor(R.color.colorBlack)
+        );
+
+
         return view;
 
 
     }
+
 
 
 }
