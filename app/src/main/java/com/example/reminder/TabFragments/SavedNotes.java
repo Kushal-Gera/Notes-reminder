@@ -1,5 +1,6 @@
 package com.example.reminder.TabFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
@@ -19,6 +20,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.reminder.NoteExtractor;
 import com.example.reminder.NoteViewHolder;
 import com.example.reminder.R;
+import com.example.reminder.SetReminder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.snackbar.Snackbar;
@@ -34,6 +36,11 @@ public class SavedNotes extends Fragment {
     private static final String NOTE = "note";
     private static final String DESC_NOTE = "desc_note";
     private static final String COLOR = "color";
+
+    private static final String TITLE = "title";
+    private static final String TEXT = "text";
+    private static final String NODE = "node";
+    private static final String IS_SAVED = "is_saved";
 
     private RecyclerView recyclerView;
     private FirebaseAuth auth;
@@ -92,6 +99,18 @@ public class SavedNotes extends Fragment {
                             final String note_text = String.valueOf(dataSnapshot.child(NOTE).getValue());
                             final String desc_text = String.valueOf(dataSnapshot.child(DESC_NOTE).getValue());
                             animationView.setVisibility(View.GONE);
+
+                            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent i = new Intent(getActivity(), SetReminder.class);
+                                    i.putExtra(TITLE, note_text);
+                                    i.putExtra(TEXT, desc_text);
+                                    i.putExtra(NODE, newNode);
+                                    i.putExtra(IS_SAVED, true);
+                                    startActivity(i);
+                                }
+                            });
 
                             holder.saved_title.setText(note_text);
                             holder.saved_desc.setText(desc_text);

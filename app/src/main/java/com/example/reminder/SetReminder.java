@@ -24,7 +24,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Random;
 
 public class SetReminder extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
@@ -36,6 +35,12 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
     private static final String ITEM_ID = "item_id";
     private static final String COLOR = "color";
     private static boolean IS_DARK = false;
+
+    private static final String TITLE = "title";
+    private static final String TEXT = "text";
+    private static final String NODE = "node";
+    private static final String IS_SAVED = "is_saved";
+
 
     //firebase stuff
     FirebaseAuth auth;
@@ -121,6 +126,12 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
         });
 
 
+        String s_title = getIntent().getStringExtra(TITLE);
+        String s_text = getIntent().getStringExtra(TEXT);
+
+        note.setText(s_title);
+        note_desc.setText(s_text);
+
     }
 
     private void swap_it() {
@@ -134,11 +145,18 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
     }
 
     private void saveData(String data, String desc) {
+        DatabaseReference new_ref;
+        if (!(getIntent().getBooleanExtra(IS_SAVED, false))) {
+            new_ref = ref.child("main").child(auth.getCurrentUser().getUid()).push();
+            new_ref.child(COLOR).setValue(new Random().nextInt(100) % 4);
 
-        DatabaseReference new_ref = ref.child("main").child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).push();
+        } else {
+            String node = getIntent().getStringExtra(NODE);
+            new_ref = ref.child("main").child(auth.getCurrentUser().getUid()).child(node);
+        }
         new_ref.child(NOTE).setValue(data);
         new_ref.child(DESC_NOTE).setValue(desc);
-        new_ref.child(COLOR).setValue(new Random().nextInt(100) % 4);
+
 
     }
 
