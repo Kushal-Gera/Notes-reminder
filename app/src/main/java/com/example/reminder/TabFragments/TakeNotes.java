@@ -1,6 +1,8 @@
 package com.example.reminder.TabFragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.example.reminder.R;
 import com.example.reminder.SetReminder;
 import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
 
 public class TakeNotes extends Fragment {
@@ -33,24 +36,29 @@ public class TakeNotes extends Fragment {
             }
         });
 
-        TapTargetView.showFor(getActivity(),
-                TapTarget.forView(view.findViewById(R.id.add_btn), "Click Here\nto Add Notes")
-                        .cancelable(true)
-                        .outerCircleColor(R.color.colorPrimary)
-                        .outerCircleAlpha(0.6f)
-                        .targetCircleColor(R.color.colorWhite)
-                        .targetRadius(50)
-                        .tintTarget(true)
-                        .transparentTarget(true)
-                        .dimColor(R.color.colorBlack)
-        );
+
+        SharedPreferences pref = getActivity().getSharedPreferences("shared_pref", Context.MODE_PRIVATE);
+        boolean first = pref.getBoolean("first_time", true);
+
+        if (first){
+            TapTargetView.showFor(getActivity(),
+                    TapTarget.forView(view.findViewById(R.id.add_btn), "Click Here\nto Add Notes")
+                            .cancelable(true)
+                            .outerCircleColor(R.color.colorPrimary)
+                            .outerCircleAlpha(0.6f)
+                            .targetCircleColor(R.color.colorWhite)
+                            .targetRadius(50)
+                            .tintTarget(true)
+                            .transparentTarget(true)
+                            .dimColor(R.color.colorBlack)
+            );
+
+        }
 
 
         return view;
 
-
     }
-
 
 
 }

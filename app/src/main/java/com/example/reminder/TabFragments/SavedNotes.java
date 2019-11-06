@@ -25,6 +25,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -100,6 +101,13 @@ public class SavedNotes extends Fragment {
                             final String desc_text = String.valueOf(dataSnapshot.child(DESC_NOTE).getValue());
                             animationView.setVisibility(View.GONE);
 
+                            holder.cross.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ref.child(newNode).removeValue();
+                                }
+                            });
+
                             holder.itemView.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -119,17 +127,10 @@ public class SavedNotes extends Fragment {
                                 int r = Integer.parseInt(String.valueOf(dataSnapshot.child(COLOR).getValue()));
                                 holder.frame_color
                                         .setBackgroundColor(getContext().getResources().getColor(colorArray[r]));
-                            }
-                            catch (NullPointerException | NumberFormatException e) {
+
+                            } catch (NullPointerException | NumberFormatException e) {
                                 e.printStackTrace();
                             }
-
-                            holder.cross.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    ref.child(newNode).removeValue();
-                                }
-                            });
 
                             holder.speak.setOnClickListener(new View.OnClickListener() {
                                 @Override

@@ -1,6 +1,7 @@
 package com.example.reminder;
 
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -128,9 +131,50 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
 
         String s_title = getIntent().getStringExtra(TITLE);
         String s_text = getIntent().getStringExtra(TEXT);
-
         note.setText(s_title);
         note_desc.setText(s_text);
+
+        SharedPreferences pref = getSharedPreferences("shared_pref", Context.MODE_PRIVATE);
+        boolean first = pref.getBoolean("first_time", true);
+
+        if (first) {
+            new TapTargetSequence(this)
+                    .targets(
+                            TapTarget.forView(findViewById(R.id.listen), "Save Notes With Voice")
+                                    .cancelable(true)
+                                    .outerCircleColor(R.color.colorPrimary)
+                                    .outerCircleAlpha(0.6f)
+                                    .targetCircleColor(R.color.colorWhite)
+                                    .targetRadius(50)
+                                    .cancelable(false)
+                                    .tintTarget(true)
+                                    .transparentTarget(true)
+                                    .dimColor(R.color.colorBlack),
+                            TapTarget.forView(findViewById(R.id.save), "Tap to save")
+                                    .cancelable(true)
+                                    .outerCircleColor(R.color.colorPrimary)
+                                    .outerCircleAlpha(0.6f)
+                                    .targetCircleColor(R.color.colorWhite)
+                                    .tintTarget(true)
+                                    .cancelable(false)
+                                    .targetRadius(50)
+                                    .transparentTarget(true)
+                                    .dimColor(R.color.colorBlack),
+                            TapTarget.forView(findViewById(R.id.alarm), "Save as Reminder With Alarm")
+                                    .cancelable(true)
+                                    .outerCircleColor(R.color.colorPrimary)
+                                    .outerCircleAlpha(0.6f)
+                                    .targetCircleColor(R.color.colorWhite)
+                                    .tintTarget(true)
+                                    .targetRadius(50)
+                                    .transparentTarget(true)
+                                    .dimColor(R.color.colorBlack)
+                    ).start();
+
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean("first_time", false).apply();
+        }
+
 
     }
 
