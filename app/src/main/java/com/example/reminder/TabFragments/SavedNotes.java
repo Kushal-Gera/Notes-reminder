@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -21,12 +23,13 @@ import com.example.reminder.SQLDatabase.NoteUser;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
+import java.util.Objects;
 
 public class SavedNotes extends Fragment {
 
     private RecyclerView recyclerView;
-
     private ImageView savedNotes;
+    MyAdapter adapter;
 
 
     @Nullable
@@ -47,17 +50,23 @@ public class SavedNotes extends Fragment {
         linearLayoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-
         final NoteDatabase database =
-                Room.databaseBuilder(getActivity(), NoteDatabase.class, "noteTable")
+                Room.databaseBuilder(Objects.requireNonNull(getActivity()), NoteDatabase.class, "noteTable")
+                        .allowMainThreadQueries()
                         .allowMainThreadQueries().build();
 
-        List<NoteUser> list = database.mydao().readData();
-
-        MyAdapter adapter = new MyAdapter(getActivity(), list);
-
-
+        adapter = new MyAdapter(getContext());
         recyclerView.setAdapter(adapter);
+
+
+        LiveData<List<NoteUser>> liveData = database.mydao().readData();
+        liveData.observe(this, new Observer<List<NoteUser>>() {
+            @Override
+            public void onChanged(List<NoteUser> listtt) {
+                adapter.setData(listtt);
+            }
+        });
+
 
         savedNotes.setOnClickListener(new View.OnClickListener() {
             @Override

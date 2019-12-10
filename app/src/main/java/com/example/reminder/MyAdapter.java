@@ -14,28 +14,31 @@ import androidx.room.Room;
 import com.example.reminder.SQLDatabase.NoteDatabase;
 import com.example.reminder.SQLDatabase.NoteUser;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Handler;
 
+@SuppressWarnings("deprecation")
 public class MyAdapter extends RecyclerView.Adapter<NoteViewHolder> {
 
     private Context context;
-    private List<NoteUser> list;
-    TextToSpeech tts;
+    private List<NoteUser> list = new ArrayList<>();
+    private TextToSpeech tts;
     private NoteDatabase database;
 
-    final int[] colorArray = new int[]{
+    private final int[] colorArray = new int[]{
             R.color.pink_note,
             R.color.orange_note,
             R.color.yellow_note,
             R.color.green_note};
 
-    public MyAdapter(Context context, List<NoteUser> list) {
+    public MyAdapter(Context context) {
         this.context = context;
-        this.list = list;
 
         database = Room.databaseBuilder(context, NoteDatabase.class, "noteTable")
                 .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
                 .allowMainThreadQueries().build();
     }
 
@@ -65,6 +68,7 @@ public class MyAdapter extends RecyclerView.Adapter<NoteViewHolder> {
                 intent.putExtra("color", list.get(position).getColor());
                 intent.putExtra("title", list.get(position).getNote());
                 intent.putExtra("text", list.get(position).getDesc());
+                intent.putExtra("id", list.get(position).getId());
 
                 context.startActivity(intent);
             }
@@ -88,6 +92,7 @@ public class MyAdapter extends RecyclerView.Adapter<NoteViewHolder> {
         holder.cross.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                notifyItemRemoved(position);
                 database.mydao().delete(list.get(position));
             }
         });
@@ -96,13 +101,17 @@ public class MyAdapter extends RecyclerView.Adapter<NoteViewHolder> {
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return (list == null) ? 0 : list.size();
     }
 
     private void speak(String data) {
-
         tts.setLanguage(Locale.getDefault());
         tts.speak(data, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+    public void setData(List<NoteUser> list) {
+        this.list = list;
+        notifyDataSetChanged();
     }
 
 

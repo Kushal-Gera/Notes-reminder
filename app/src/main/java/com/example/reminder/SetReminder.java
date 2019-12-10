@@ -186,23 +186,16 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
     private void saveData(String data, String desc) {
         NoteUser user = new NoteUser();
 
-        //new note
-        if (!(getIntent().getBooleanExtra(IS_SAVED, false))) {
+        if (!(getIntent().getBooleanExtra(IS_SAVED, false))) {  //new note
             user.setNote(data);
             user.setDesc(desc);
             int i = new Random().nextInt(100);
             user.setColor(i % 4);
 
             database.mydao().insert(user);
-        }
-        //saved note being updated
-        else {
 
-            user.setNote(data);
-            user.setDesc(desc);
-            user.setColor(getIntent().getIntExtra("color", 0));
-
-            database.mydao().update(user);
+        } else {    //saved note being updated
+            database.mydao().updateNote(data, desc, getIntent().getIntExtra("id", 0));
         }
 
     }
