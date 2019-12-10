@@ -30,11 +30,8 @@ public class Settings extends Fragment {
     private static final String ITEM_ID = "item_id";
     private static final String SWITCH_POS = "switch";
 
-    FirebaseAuth auth;
-
-    Button signout;
-
     private Switch themeSwitch;
+    FirebaseAuth auth;
 
     @Nullable
     @Override

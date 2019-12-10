@@ -17,8 +17,8 @@ public class NoteViewHolder extends RecyclerView.ViewHolder {
     public NoteViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        saved_desc = itemView.findViewById(R.id.saved_desc);
         saved_title = itemView.findViewById(R.id.saved_title);
+        saved_desc = itemView.findViewById(R.id.saved_desc);
         cross = itemView.findViewById(R.id.cross);
         speak = itemView.findViewById(R.id.speak);
         frame_color = itemView.findViewById(R.id.frame_color);

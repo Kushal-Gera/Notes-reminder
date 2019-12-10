@@ -18,7 +18,10 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.room.Room;
 
+import com.example.reminder.SQLDatabase.NoteDatabase;
+import com.example.reminder.SQLDatabase.NoteUser;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,7 +30,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Random;
 
 public class SetReminder extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private static final String TAG = "SetReminder";
@@ -44,6 +46,7 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
     private static final String NODE = "node";
     private static final String IS_SAVED = "is_saved";
 
+    private NoteDatabase database;
 
     //firebase stuff
     FirebaseAuth auth;
@@ -68,6 +71,10 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
         // initialisations
         auth = FirebaseAuth.getInstance();
         ref = FirebaseDatabase.getInstance().getReference();
+        database =
+                Room.databaseBuilder(this, NoteDatabase.class, "noteTable")
+                        .allowMainThreadQueries().build();
+
 
         save = findViewById(R.id.save);
         swap = findViewById(R.id.swap);
@@ -190,16 +197,30 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
 
     private void saveData(String data, String desc) {
         DatabaseReference new_ref;
-        if (!(getIntent().getBooleanExtra(IS_SAVED, false))) {
-            new_ref = ref.child("main").child(auth.getCurrentUser().getUid()).push();
-            new_ref.child(COLOR).setValue(new Random().nextInt(100) % 4);
+        NoteUser user = new NoteUser();
 
-        } else {
-            String node = getIntent().getStringExtra(NODE);
-            new_ref = ref.child("main").child(auth.getCurrentUser().getUid()).child(node);
+        //new note
+        if (!(getIntent().getBooleanExtra(IS_SAVED, false))) {
+//            new_ref = ref.child("main").child(auth.getCurrentUser().getUid()).push();
+//            new_ref.child(COLOR).setValue(new Random().nextInt(100) % 4);
+
+            user.setNote(data);
+            user.setDesc(desc);
+
+            database.mydao().insert(user);
         }
-        new_ref.child(NOTE).setValue(data);
-        new_ref.child(DESC_NOTE).setValue(desc);
+        //saved note being updated
+        else {
+//            String node = getIntent().getStringExtra(NODE);
+//            new_ref = ref.child("main").child(auth.getCurrentUser().getUid()).child(node);
+
+            user.setNote(data);
+            user.setDesc(desc);
+
+            database.mydao().update(user);
+        }
+//        new_ref.child(NOTE).setValue(data);
+//        new_ref.child(DESC_NOTE).setValue(desc);
 
 
     }
@@ -229,9 +250,7 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Say Something !");
 
         try {
-
             startActivityForResult(intent, 1);
-
         } catch (Exception e) {
             Toast.makeText(this, "ERROR\n" + e.getMessage().toString(), Toast.LENGTH_SHORT).show();
         }

@@ -1,9 +1,11 @@
 package com.example.reminder;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -68,6 +70,15 @@ public class LoginAct extends AppCompatActivity {
                     phone.setError("Phone Number Required");
                     phone.requestFocus();
                 }
+
+//      even I don't how this coding is working, I just pasted it :)
+                View view = getCurrentFocus();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+//      but I am sure that after this 'keyboard is gone'
+
             }
         });
 
