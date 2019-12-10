@@ -11,8 +11,16 @@ public class NoteUser {
     private int id;
 
     private String note;
-
     private String desc;
+    private int color;
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
 
     public int getId() {
         return id;

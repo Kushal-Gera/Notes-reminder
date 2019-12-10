@@ -24,33 +24,24 @@ import com.example.reminder.SQLDatabase.NoteDatabase;
 import com.example.reminder.SQLDatabase.NoteUser;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Random;
 
 public class SetReminder extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private static final String TAG = "SetReminder";
 
-    private static final String NOTE = "note";
-    private static final String DESC_NOTE = "desc_note";
     public static final String SHARED_PREF = "shared_preference";
     private static final String ITEM_ID = "item_id";
-    private static final String COLOR = "color";
     private static boolean IS_DARK = false;
 
     private static final String TITLE = "title";
     private static final String TEXT = "text";
-    private static final String NODE = "node";
     private static final String IS_SAVED = "is_saved";
 
     private NoteDatabase database;
 
-    //firebase stuff
-    FirebaseAuth auth;
-    DatabaseReference ref;
 
     Button save, alarm;
     EditText note, note_desc;
@@ -68,13 +59,10 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
         setContentView(R.layout.activity_set_reminder);
 
 
-        // initialisations
-        auth = FirebaseAuth.getInstance();
-        ref = FirebaseDatabase.getInstance().getReference();
         database =
                 Room.databaseBuilder(this, NoteDatabase.class, "noteTable")
+                        .fallbackToDestructiveMigration()
                         .allowMainThreadQueries().build();
-
 
         save = findViewById(R.id.save);
         swap = findViewById(R.id.swap);
@@ -196,32 +184,26 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
     }
 
     private void saveData(String data, String desc) {
-        DatabaseReference new_ref;
         NoteUser user = new NoteUser();
 
         //new note
         if (!(getIntent().getBooleanExtra(IS_SAVED, false))) {
-//            new_ref = ref.child("main").child(auth.getCurrentUser().getUid()).push();
-//            new_ref.child(COLOR).setValue(new Random().nextInt(100) % 4);
-
             user.setNote(data);
             user.setDesc(desc);
+            int i = new Random().nextInt(100);
+            user.setColor(i % 4);
 
             database.mydao().insert(user);
         }
         //saved note being updated
         else {
-//            String node = getIntent().getStringExtra(NODE);
-//            new_ref = ref.child("main").child(auth.getCurrentUser().getUid()).child(node);
 
             user.setNote(data);
             user.setDesc(desc);
+            user.setColor(getIntent().getIntExtra("color", 0));
 
             database.mydao().update(user);
         }
-//        new_ref.child(NOTE).setValue(data);
-//        new_ref.child(DESC_NOTE).setValue(desc);
-
 
     }
 
@@ -264,7 +246,7 @@ public class SetReminder extends AppCompatActivity implements TimePickerDialog.O
 
             ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
-            note.setText(result.get(0).toString());
+            note.setText(result.get(0));
         }
 
         super.onActivityResult(requestCode, resultCode, data);
