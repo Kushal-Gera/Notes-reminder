@@ -15,6 +15,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/searchNotes"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:contentDescription="@string/description"
+            android:padding="3dp"
+            android:src="@drawable/delete" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

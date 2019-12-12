@@ -92,7 +92,6 @@ public class MyAdapter extends RecyclerView.Adapter<NoteViewHolder> {
         holder.cross.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                notifyItemRemoved(position);
                 database.mydao().delete(list.get(position));
             }
         });
