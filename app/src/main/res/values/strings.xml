@@ -17,4 +17,5 @@
     <string name="enter_description">Enter Description</string>
     <string name="saved_notes">Saved Notes</string>
     <string name="build_version">Build Version</string>
+    <string name="search">Search</string>
 </resources>

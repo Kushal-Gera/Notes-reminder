@@ -2,9 +2,11 @@ package com.example.reminder.TabFragments;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -63,10 +65,11 @@ public class SavedNotes extends Fragment {
             public void onChanged(final List<NoteUser> listtt) {
                 adapter.setData(listtt);
 
-                view.findViewById(R.id.text_view3).setOnClickListener(new View.OnClickListener() {
+                view.findViewById(R.id.searchNotes).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        searchInData("hello", listtt);
+                        if (!TextUtils.isEmpty(((EditText) v).getText()))
+                            searchInData(((EditText) v).getText().toString(), listtt);
                     }
                 });
 
@@ -114,23 +117,25 @@ public class SavedNotes extends Fragment {
     private void searchInData(String text, List<NoteUser> data) {
 
         int found = 0;
+        int index = 0;
 
         for (int i = 0; i < data.size(); i++) {
-            if (data.get(i).getNote().contains(text)){
+            if (data.get(i).getNote().toLowerCase().contains(text.toLowerCase())) {
                 found = 2;
+                index = data.size() - i;
                 break;
-            }
-            else if (data.get(i).getDesc().contains(text)){
+            } else if (data.get(i).getDesc().toLowerCase().contains(text.toLowerCase())) {
                 found = 1;
+                index = data.size() - i;
                 break;
             }
         }
 
 
         if (found == 2)
-            Toast.makeText(getActivity(), "Note, got -> " + text, Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Found in title " + index, Toast.LENGTH_LONG).show();
         else if (found == 1)
-            Toast.makeText(getActivity(), "Desc, got -> " + text, Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Found in description " + index, Toast.LENGTH_LONG).show();
         else
             Toast.makeText(getActivity(), "nothing found !!", Toast.LENGTH_LONG).show();
 
